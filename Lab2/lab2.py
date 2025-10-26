@@ -37,14 +37,14 @@ if __name__ == "__main__":
     plt.show()
 
     signal = 0
-    for pixel in range(28*28):
+    for pixel in range(28 * 28):
         signal += random_test_image_norm[0][pixel]
 
     # Отношение: полезный сигнал/сигнал с шумом
     ratio = []
     accuracy = []
     noice_epochs = 100
-    max_delta = 1/noice_epochs
+    max_delta = 1 / noice_epochs
     current_general_delta = 0
     for noice_epoch in range(noice_epochs):
         for pixel_width in range(28):
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         if noice_epoch == 90:
             plt.imshow(random_test_image)
             plt.show()
-        ratio.append(signal/(signal + current_general_delta))
+        ratio.append(signal / (signal + current_general_delta))
         nn_prediction = model.predict(random_test_image_norm)
         print(f"Эпоха: {noice_epoch}, Наиболее вероятное: {nn_prediction[0].argmax()}")
         accuracy.append(nn_prediction[0][random_test_label])
